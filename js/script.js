@@ -7,3 +7,21 @@ Se il numero è presente nella lista dei numeri generati, la partita termina, al
 La partita termina quando il giocatore inserisce un numero “vietato” o raggiunge il numero massimo possibile di numeri consentiti.
 Al termine della partita il software deve comunicare il punteggio, cioè il numero di volte che l’utente ha inserito un numero consentito.
 */
+//Funzione per generare numero random
+
+function randomNumber( min, max) {
+ return parseInt(Math.random() * (max - min) + min + 1) ;
+}
+
+
+//Creo un array vuoto per i numeri generati dal computer
+var numbers = [];
+
+
+//Utilizzo il ciclo while per generare 16 numeri random
+i = 0;
+while ( i < 16) {
+  numbers.push(randomNumber(1,30));
+   console.log( numbers[i]);
+   i++;
+}
