@@ -13,15 +13,31 @@ function randomNumber( min, max) {
  return parseInt(Math.random() * (max - min) + min + 1) ;
 }
 
-
-//Creo un array vuoto per i numeri generati dal computer
-var numbers = [];
-
-
-//Utilizzo il ciclo while per generare 16 numeri random
-i = 0;
-while ( i < 16) {
-  numbers.push(randomNumber(1,30));
-   console.log( numbers[i]);
-   i++;
+//Funzione per cercare in un array
+function isInArray(array, item) {
+  var i = 0;
+  var risultato = false;
+  while (i < array.length && risultato == false) {
+    if (array[i] == item) {
+      risultato = true;
+    }
+    i++;
+  }
+  return risultato;
 }
+
+
+//Creo un array vuoto per i numeri generati dal computer randomici
+var numbersRandom = [];
+//Creo un array vuoto per i numeri generati dall'utente
+var numeriUtente = [];
+//Inizializzo un ciclo while per stampare 16 numeri
+while (numbersRandom.length < 16) {
+  var numberRandom = randomNumber(1,100);
+  //Evoco la mia funzione isInArray per non ripetere un numero
+  var finding = isInArray( numbersRandom, numberRandom);
+  if ( finding == false ) {
+    numbersRandom.push(numberRandom);
+  }
+}
+console.log( numbersRandom );
