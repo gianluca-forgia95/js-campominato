@@ -44,19 +44,28 @@ console.log( numbersRandom );
 //Inizio ad interagire con l'utente
 //Creo delle variabili
 var numeroUtente;
-var tentativi = 5;
+var tentativi = 84;
 var found = false;
 var score = 0;
+
 while ( numeriUtente.length < tentativi && found == false ) {
 //Chiedo all'utente un numero da 1 a 100
 var numeroUtente = parseInt(prompt('Inserisci un numero tra 0 e 100'));
-//Stabilisco le condizioni
-  //Se l'utente digita un numero che si trova nell'array allora l'utente ha perso
-  if (isInArray(numbersRandom, numeroUtente) == true ) {
-    alert('hai preso la mina! hai perso.');
-    found == true;
-  
-  } else {
 
+  //Se l'utente digita un numero che si trova nell'array allora l'utente ha perso
+  if (isInArray(numbersRandom, numeroUtente) == true  ) {
+    found = true;
+    alert('hai preso la mina! hai perso.');
+
+  } else {
+   numeriUtente.push(numeroUtente);
   }
+
  }
+
+ //Condizione per la vittoria
+ if ( numeriUtente.length == tentativi ) {
+   alert('Hai vinto!! Congratulazioni');
+ }
+ //Stampo il punteggio in console
+ console.log( 'il tuo punteggio è: ' + numeriUtente.length );
