@@ -46,26 +46,33 @@ console.log( numbersRandom );
 var numeroUtente;
 var tentativi = 84;
 var found = false;
-var score = 0;
+
 
 while ( numeriUtente.length < tentativi && found == false ) {
 //Chiedo all'utente un numero da 1 a 100
 var numeroUtente = parseInt(prompt('Inserisci un numero tra 0 e 100'));
 
+var foundNumber = isInArray(numeriUtente, numeroUtente);
   //Se l'utente digita un numero che si trova nell'array allora l'utente ha perso
-  if (isInArray(numbersRandom, numeroUtente) == true  ) {
+  if (isInArray(numbersRandom, numeroUtente) == true && foundNumber == false  ) {
     found = true;
     alert('hai preso la mina! hai perso.');
 
-  } else {
+  }
+  else if (foundNumber == true ) {
+    alert('Hai digitato lo stesso numero, ricomincia');
+  }
+   else  {
    numeriUtente.push(numeroUtente);
   }
 
- }
+
 
  //Condizione per la vittoria
  if ( numeriUtente.length == tentativi ) {
    alert('Hai vinto!! Congratulazioni');
+ }
+
  }
  //Stampo il punteggio in console
  console.log( 'il tuo punteggio è: ' + numeriUtente.length );
