@@ -73,17 +73,27 @@ var tentativi = maxBombe - 16;
 var found = false;
 //Inizializzo il ciclo
 while ( numeriUtente.length < tentativi && found == false ) {
-//Chiedo all'utente un numero da 1 a 100
-var numeroUtente = parseInt(prompt('Inserisci un numero tra 0 e 100'));
+//Chiedo all'utente un numero in base al livello di difficoltà che ha scelto
+if (maxBombe == 80) {
+  var numeroUtente = parseInt(prompt('Inserisci un numero tra 1 e 80'));
+} else if ( maxBombe == 50 ) {
+  var numeroUtente = parseInt(prompt('Inserisci un numero tra 1 e 50'));
+} else {
+  var numeroUtente = parseInt(prompt('Inserisci un numero tra 1 e 100'));
+}
+//Nel caso l'utente digiti una parola
+if (isNaN(numeroUtente)) {
+  alert('Inserici un numero!! non una parola')
+}
 
 var foundNumber = isInArray(numeriUtente, numeroUtente);
   //Se l'utente digita un numero che si trova nell'array allora l'utente ha perso
   if (isInArray(numbersRandom, numeroUtente) == true && foundNumber == false  ) {
     found = true;
     alert('hai preso la mina! hai perso.');
-  }//Se digita lo stesso numero lo faccio ricominciare
+  }//Se digita lo stesso numero gli faccio inserire un altro numero
   else if (foundNumber == true ) {
-    alert('Hai digitato lo stesso numero, ricomincia');
+    alert('Hai digitato lo stesso numero, inseriscine un altro!');
   }//Altrimenti il gioco continua
    else  {
    numeriUtente.push(numeroUtente);
