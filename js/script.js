@@ -66,8 +66,6 @@ var foundNumber = isInArray(numeriUtente, numeroUtente);
    numeriUtente.push(numeroUtente);
   }
 
-
-
  //Condizione per la vittoria
  if ( numeriUtente.length == tentativi ) {
    alert('Hai vinto!! Congratulazioni');
