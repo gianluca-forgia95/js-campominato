@@ -7,13 +7,21 @@ Se il numero è presente nella lista dei numeri generati, la partita termina, al
 La partita termina quando il giocatore inserisce un numero “vietato” o raggiunge il numero massimo possibile di numeri consentiti.
 Al termine della partita il software deve comunicare il punteggio, cioè il numero di volte che l’utente ha inserito un numero consentito.
 */
+/*
+BONUS: (da fare solo se funziona tutto il resto)
+all’inizio il software richiede anche una difficoltà all’utente che cambia il range di numeri casuali:
+con difficoltà 0 => tra 1 e 100
+con difficoltà 1 => tra 1 e 80
+con difficoltà 2 => tra 1 e 50
+*/
+
+//FUNZIONI utili per il programma
 
 //Funzione per generare numero random
-
 function randomNumber( min, max) {
  return parseInt(Math.random() * (max - min) + min + 1) ;
 }
-//Funzione per cercare in un array
+//Funzione per cercare un elemento in un array
 function isInArray(array, item) {
   var i = 0;
   var risultato = false;
@@ -27,27 +35,43 @@ function isInArray(array, item) {
 }
 
 
-//Creo un array vuoto per i numeri generati dal computer randomici
+//Faccio scegliere la difficoltà per giocare
+do {
+var sceltaUtente = parseInt(prompt('Seleziona la difficoltà: 0 , 1 , 2'));
+} while ( sceltaUtente != 0 && sceltaUtente != 1 && sceltaUtente != 2);
+//Uso lo switch per impostare la difficoltà e cambiare il range di numeri random
+var maxBombe;
+switch (sceltaUtente) {
+  case 0:
+    maxBombe = 100;
+    break;
+  case 1:
+    maxBombe = 80;
+    break;
+  default:
+    maxBombe = 50;
+}
+
+//Array vuoti per numeri random e numeri inseriti dall'utente
 var numbersRandom = [];
-//Creo un array vuoto per i numeri generati dall'utente
 var numeriUtente = [];
-//Inizializzo un ciclo while per stampare 16 numeri
+//Inizializzo un ciclo while per stampare 16 numeri random
 while (numbersRandom.length < 16) {
-  var numberRandom = randomNumber(1,100);
+  var numberRandom = randomNumber(1, maxBombe);
   //Evoco la mia funzione isInArray per non ripetere un numero
   var finding = isInArray( numbersRandom, numberRandom);
   if ( finding == false ) {
     numbersRandom.push(numberRandom);
   }
 }
+//Stampo i numeri random generati in console
 console.log( numbersRandom );
-//Inizio ad interagire con l'utente
-//Creo delle variabili
+
+//Creo delle variabili utili per il ciclo while del gioco
 var numeroUtente;
-var tentativi = 84;
+var tentativi = maxBombe - 16;
 var found = false;
-
-
+//Inizializzo il ciclo
 while ( numeriUtente.length < tentativi && found == false ) {
 //Chiedo all'utente un numero da 1 a 100
 var numeroUtente = parseInt(prompt('Inserisci un numero tra 0 e 100'));
@@ -57,11 +81,10 @@ var foundNumber = isInArray(numeriUtente, numeroUtente);
   if (isInArray(numbersRandom, numeroUtente) == true && foundNumber == false  ) {
     found = true;
     alert('hai preso la mina! hai perso.');
-
-  }
+  }//Se digita lo stesso numero lo faccio ricominciare
   else if (foundNumber == true ) {
     alert('Hai digitato lo stesso numero, ricomincia');
-  }
+  }//Altrimenti il gioco continua
    else  {
    numeriUtente.push(numeroUtente);
   }
